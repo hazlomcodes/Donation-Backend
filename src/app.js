@@ -1,11 +1,11 @@
 const express = require('express');
+const donationRouter = require('./routes/donation');
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.status(200).send('Hello World');
-});
+app.use('/donations', donationRouter);
 
 module.exports = app;
+
