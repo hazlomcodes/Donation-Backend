@@ -1,9 +1,9 @@
 import { Op } from "sequelize";
-import { findOne } from "../models/user";
+import User from "../models/user";
 
 export async function login(req, res) {
   const { username, password } = req.body;
-  const user = await findOne({ where: { username } });
+  const user = await User.findOne({ where: { username } });
   if (!user) {
     return res.status(401).json({ message: "Invalid credentials." });
   }
