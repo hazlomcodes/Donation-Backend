@@ -1,6 +1,6 @@
 // src/routes/Donation.js
 const express = require('express');
-const { createDonation } = require('../controllers/donations');
+const { createDonation } = require('../controllers/donation');
 
 const router = express.Router();
 
