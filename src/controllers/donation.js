@@ -1,7 +1,7 @@
 // src/controllers/Donation.js
 const db = require('../db/index');
 
-const createDonation = async (req, res) => {
+exports.createDonation = async (req, res) => {
   const { name, quantity, expiration } = req.body;
 
   try {
@@ -12,7 +12,7 @@ const createDonation = async (req, res) => {
   }
 };
 
-const deleteDonation = async (req, res) => {
+exports.deleteDonation = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -28,4 +28,4 @@ const deleteDonation = async (req, res) => {
   }
 };
 
-module.exports = { createDonation, deleteDonation };
+
