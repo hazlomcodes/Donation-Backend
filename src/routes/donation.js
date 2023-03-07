@@ -1,9 +1,10 @@
 // src/routes/Donation.js
 const express = require('express');
-const { createDonation } = require('../controllers/donation');
+const donationController = require('../controllers/donation');
 
-const router = express.Router();
+const donationRouter = express.Router();
 
-router.post('/donations', createDonation);
+donationRouter.post('/', donationController.createDonation);
+donationRouter.delete('/:id', donationController.deleteDonation);
 
-module.exports = router;
+module.exports = donationRouter;
