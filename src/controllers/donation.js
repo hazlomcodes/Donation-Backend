@@ -13,6 +13,17 @@ exports.createDonation = async (req, res) => {
 };
 
 // src/controllers/Donation.js
+exports.getAllDonations = async (req, res) => {
+  try {
+    const { rows } = await db.query('SELECT * FROM Donations');
+    res.status(200).json(rows);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
+
+// src/controllers/Donation.js
 exports.searchDonations = async (req, res) => {
   const { name } = req.query;
 
