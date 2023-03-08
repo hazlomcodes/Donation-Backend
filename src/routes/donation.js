@@ -4,7 +4,8 @@ const donationController = require('../controllers/donation');
 
 const donationRouter = express.Router();
 
-donationRouter.get('/', donationController.searchDonations);
+donationRouter.get('/', donationController.getAllDonations);
+donationRouter.get('/search', donationController.searchDonations);
 donationRouter.post('/', donationController.createDonation);
 donationRouter.delete('/:id', donationController.deleteDonation);
 
