@@ -1,4 +1,4 @@
-// src/controllers/Donation.js
+
 const db = require('../db/index');
 
 exports.createDonation = async (req, res) => {
@@ -12,7 +12,7 @@ exports.createDonation = async (req, res) => {
   }
 };
 
-// src/controllers/Donation.js
+
 exports.getAllDonations = async (req, res) => {
   try {
     const { rows } = await db.query('SELECT * FROM Donations');
@@ -23,7 +23,7 @@ exports.getAllDonations = async (req, res) => {
 };
 
 
-// src/controllers/Donation.js
+
 exports.searchDonations = async (req, res) => {
   const { name } = req.query;
 
@@ -56,5 +56,25 @@ exports.deleteDonation = async (req, res) => {
     res.status(500).json(err.message);
   }
 };
+
+
+exports.updateQuantity = async (req, res) => {
+  const { id } = req.params;
+  const { quantity } = req.body;
+
+  try {
+    const { rowCount } = await db.query('UPDATE Donations SET quantity = $1 WHERE id = $2', [quantity, id]);
+
+    if (rowCount === 0) {
+      res.status(404).json({ error: 'Donation not found' });
+    } else {
+      res.status(200).json({ message: 'Donation updated successfully' });
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
+
 
 
