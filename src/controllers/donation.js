@@ -12,6 +12,24 @@ exports.createDonation = async (req, res) => {
   }
 };
 
+// src/controllers/Donation.js
+exports.searchDonations = async (req, res) => {
+  const { name } = req.query;
+
+  try {
+    const { rows } = await db.query('SELECT * FROM Donations WHERE name ILIKE $1', [`%${name}%`]);
+
+    if (rows.length === 0) {
+      res.status(404).json({ error: 'No donations found' });
+    } else {
+      res.status(200).json(rows);
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
+
 exports.deleteDonation = async (req, res) => {
   const { id } = req.params;
 
