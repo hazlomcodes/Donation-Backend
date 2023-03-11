@@ -1,14 +1,14 @@
 const db = require('../db/index');
 
 exports.createDonation = async (req, res) => {
-  const { name, quantity, expiration } = req.body;
+  const { name, quantity, expiration, donator, contact } = req.body;
 
   try {
     const {
       rows: [donation],
     } = await db.query(
-      'INSERT INTO Donations (name, quantity, expiration) VALUES ($1, $2, $3) RETURNING *',
-      [name, quantity, expiration]
+      'INSERT INTO Donations (name, quantity, expiration, donator, contact) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [name, quantity, expiration, donator, contact]
     );
     res.status(201).json(donation);
   } catch (err) {
