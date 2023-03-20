@@ -1,0 +1,1 @@
+ALTER TABLE Donations ADD dropoff VARCHAR(255);
