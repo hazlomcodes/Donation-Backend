@@ -13,8 +13,10 @@ describe('Donation controller', () => {
     it('should create a new donation', async () => {
       const donation = {
         name: 'Canned Soup',
-        quantity: 10,
+        quantity: '10',
         expiration: '2022-04-01',
+        donator: 'John Smith',
+        dropoff: '24 Zoo Lane'
       };
 
       const response = await request(app).post('/donations').send(donation);
@@ -24,6 +26,8 @@ describe('Donation controller', () => {
       expect(response.body.name).to.equal(donation.name);
       expect(response.body.quantity).to.equal(donation.quantity);
       expect(response.body.expiration).to.equal(donation.expiration);
+      expect(response.body.donator).to.equal(donation.donator);
+      expect(response.body.dropoff).to.equal(donation.dropoff);
     });
 
     it('should return an error if the request body is missing required fields', async () => {
@@ -41,8 +45,12 @@ describe('Donation controller', () => {
       const {
         rows: [donation],
       } = await db.query(
-        'INSERT INTO Donations (name, quantity, expiration) VALUES ($1, $2, $3) RETURNING *',
-        ['Canned Soup', 10, '2022-04-01']
+        'INSERT INTO Donations (name, quantity, expiration, donator, dropoff) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+        ['Canned Soup', 
+        '10', 
+        '2022-04-01',
+        'John Smith',
+        '24 Zoo Lane']
       );
 
       const response = await request(app).delete(`/donations/${donation.id}`);
